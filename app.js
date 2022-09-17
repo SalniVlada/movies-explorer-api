@@ -15,11 +15,11 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { limiter } = require('./utils/rateLimit');
 
+app.use(requestLogger);
 app.use(limiter);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(requestLogger);
 
 app.use(cors);
 

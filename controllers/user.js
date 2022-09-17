@@ -12,7 +12,11 @@ module.exports.getUsersMe = (req, res, next) => {
     .orFail(() => {
       throw new NOT_FOUND_ERROR('Пользователь с таким id не найден');
     })
-    .then((user) => res.status(OK).send(user))
+    .then((user) => {
+      const userWithoutPassword = user;
+      userWithoutPassword.password = undefined;
+      res.status(OK).send(userWithoutPassword);
+    })
     .catch((err) => errorMessage(err, req, res, next));
 };
 
@@ -39,7 +43,11 @@ module.exports.createUser = (req, res, next) => {
     .then((hash) => User.create({
       name, email, password: hash,
     }))
-    .then((user) => res.status(CREATED).send({ data: user }))
+    .then((user) => {
+      const userWithoutPassword = user;
+      userWithoutPassword.password = undefined;
+      res.status(CREATED).send(userWithoutPassword);
+    })
     .catch((err) => errorMessage(err, req, res, next));
 };
 
