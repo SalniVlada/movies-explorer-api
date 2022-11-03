@@ -1,7 +1,8 @@
 const allowedCors = [
   'https://salnivlada.nomoredomains.sbs',
   'http://salnivlada.nomoredomains.sbs',
-  'localhost:3000',
+  'http://localhost:3000',
+  'http://localhost:3001',
 ];
 
 module.exports.cors = (req, res, next) => {
